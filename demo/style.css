@@ -1,0 +1,106 @@
+* {
+	
+}
+
+body {
+	text-align: center;
+	font-family: arial;
+	color: #444;
+	line-height: 1.5;
+}
+
+header, section {
+	position: relative;
+	z-index: 7;
+}
+
+section {
+	background: rgba(255,255,255,0.3);
+	padding: 10px 40px;
+	max-width: 600px;
+	margin: 10px auto;
+	opacity: 0;
+	-webkit-transition: opacity 1s linear;
+	-moz-transition: opacity 1s linear;
+	transition: opacity 1s linear;
+}
+
+h1 {
+	position: relative;
+	top: 50px;
+	font-size: 100px;
+	margin: 20px 0 10px;
+	-webkit-transition: all 1s linear;
+	-moz-transition: all 1s linear;
+	transition: all 1s linear;
+}
+
+header p {
+	opacity: 0;
+	font-size: 18px;
+	line-height: 1;
+	margin: 0 0 40px;
+	font-weight: bold;
+	-webkit-transition: all 1s linear;
+	-moz-transition: all 1s linear;
+	transition: all 1s linear;
+}
+
+/* Scene Animations */
+
+.scene-2 h1 {
+	top: 0;
+	font-size: 32px;
+	opacity: .5;
+}
+
+.scene-2 header p {
+	opacity: 1;
+	font-size: 60px;
+}
+
+.scene-3 #vision {
+	opacity: 1;
+}
+
+.scene-7 #happy {
+	opacity: 1;
+}
+
+
+
+.block {
+	width: 50%;
+	height: 50%;
+	-webkit-transform:rotate(120deg);
+	-moz-transform:rotate(120deg);
+	transform:rotate(120deg);
+	background: orange;
+	position: absolute;
+	opacity: .4;
+	z-index: 5;
+}
+
+#block_1 {
+	top: -50%;
+	left: -50%;
+	background: orange;
+}
+
+#block_2 {
+	top: -50%;
+	right: -50%;
+	background: pink;
+}
+
+#block_3 {
+	bottom: -50%;
+	left: -50%;
+	background: lightblue;
+}
+
+#block_4 {
+	bottom: -50%;
+	right: -50%;
+	background: yellow;
+}
