@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	var movie = new GenerateMovie({
-		scenes: 7, /*Number of Scenes || int */
+		scenes: 15, /*Number of Scenes || int */
 		scene_length: 'window', /* Height of each scene || int or 'window' if you want the 'length of one of your secenes to be the size of your browser window'  */
 		stage_ele: '#stage', /* element to use as your movie 'stage' */
-		scene_mgr: 'body' /* element that will track which 'scene' is current in order to apply CSS changes / animations */
+		scene_mgr: 'body', /* element that will track which 'scene' is current in order to apply CSS changes / animations */
+		main_ele: '#main_content' /* element that contains the main content of the website */
 	});
 	
 	var thread = new Thread({
@@ -94,6 +95,15 @@ $(document).ready(function(){
 		prop_end: 75,
 		unit: '%',
 		timeline_start: 0, 
+		timeline_end: 100 
+	});
+	var thread11 = new Thread({
+		element: 'header h1',
+		property: 'margin-top',
+		prop_start: 150, 
+		prop_end: 0,
+		unit: 'px',
+		timeline_start: 10, 
 		timeline_end: 100 
 	});
 });

@@ -14,6 +14,11 @@ header, section {
 	z-index: 7;
 }
 
+#main_content {
+	position: relative;
+	margin-bottom: 150px;
+}
+
 section {
 	background: rgba(255,255,255,0.3);
 	padding: 10px 40px;
@@ -52,6 +57,7 @@ header p {
 	top: 0;
 	font-size: 32px;
 	opacity: .5;
+	margin-top: 150px;
 }
 
 .scene-2 header p {
@@ -63,10 +69,9 @@ header p {
 	opacity: 1;
 }
 
-.scene-7 #happy {
+.scene-11 #happy {
 	opacity: 1;
 }
-
 
 
 .block {

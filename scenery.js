@@ -15,12 +15,30 @@ var GenerateMovie = (function($,_){
 				timeline_ele: 'html',
 				stage_ele: '#stage',
 				stage_height: 'window',
-				scene_mgr: 'body' 
+				scene_mgr: 'body',
+				main_ele: '#main_content'
 			},
 			options = $.extend({}, defaults, options),
 			environment,
 			timeline,
 			scene_switch;
+
+		if(options.main_ele == '#main_content'){
+			environment = this.environment();
+			main_height = $('#main_content').outerHeight();
+			if(main_height > this.Window.height){
+				var woffset = main_height - this.Window.height;
+				var mainThread = new Thread({
+					element: options.main_ele,
+					property: 'top',
+					prop_start: 0,
+					prop_end: -woffset,
+					unit: 'px',
+					timeline_start: 0,
+					timeline_end: 100
+				});
+			}
+		}
 
 		if(options.scene_length == 'window'){
 			environment = this.environment();
@@ -64,14 +82,9 @@ var GenerateMovie = (function($,_){
 		},
 
 		sceneSwitches : function(scenes, scene_length, scene_mgr){
-			console.log('# sc ' + scenes);
-			console.log('s len ' + scene_length);
-
 			scrollProps = {};
 			scrollProps.Y = $(window).scrollTop();
 			
-			console.log(scrollProps.Y);
-
 			for(i = 1; i <= scenes; i++){
 				if((scrollProps.Y + 20) >= scene_length * i){
 					$(scene_mgr).addClass('scene-' + (i + 1));
@@ -81,7 +94,6 @@ var GenerateMovie = (function($,_){
 
 				}
 			}
-			console.log(i);
 		}
 	}
 	return GenerateMovie;
