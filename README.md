@@ -1,12 +1,11 @@
 # scenery.js
-=======
 
 scenery.js is a Javascript library that can help bring a 'film strip' metaphor to a web browser experience
 
 Please check out the Demo for a sample implementation.
 
 ## About the Library (What it do?!)
-======
+
 The scenery.js has two main options for implementing a 'film strip'-esque metaphor to your web browser experience.
 
 The operative component in this scenario is the scrollbar.
@@ -37,13 +36,13 @@ At this time, the library supports mapping to the following CSS properties:
 * font-size
 
 ## Dependencies
-======
+
 Currently, this library depends on:
 * jQuery 1.9.x (http://code.jquery.com/)
 * Underscore.js (http://underscorejs.org/)
 
 ## Usage
-======
+
 At minimum, this library requires a DOM element that will act as the 'Stage' for your movie.
 
 A few of the initial prototypes have led the developers to recognize that this may not be necessary over time, but it is in the current iteration of this library.
