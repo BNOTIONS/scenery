@@ -58,10 +58,10 @@ var movie = new GenerateMovie();
 
 #### GenerateMovie() Config Options
 The GenerateMovie() function supports the following configurations:
-* scenes: integer (default: 7) - Number of Scenes in movie
-* scene_length: integer or 'window' (default: 'window') - Height of each scene expressed as on integer or 'window' if you want the 'length' of one of your secenes to be the size of your browser window
-* stage_ele: jQuery DOM element selector (default: '#stage') - element to use as your movie 'stage'
-* scene_mgr: jQuery DOM element selector (default: 'body') - element that will track which 'scene' is current in order to apply CSS changes / animations
+* **scenes**: integer (default: 7) - Number of Scenes in movie
+* **scene_length**: integer or 'window' (default: 'window') - Height of each scene expressed as on integer or 'window' if you want the 'length' of one of your secenes to be the size of your browser window
+* **stage_ele**: jQuery DOM element selector (default: '#stage') - element to use as your movie 'stage'
+* **scene_mgr**: jQuery DOM element selector (default: 'body') - element that will track which 'scene' is current in order to apply CSS changes / animations
 
 ##### Example
 ```javascript
@@ -80,15 +80,15 @@ To create a new instance of an element that is mapped to the scroll grip, call t
 var thread = new Thread();
 ```
 
-#### Config Options
+#### Thread() Config Options
 
-* element: jQuery DOM element selector (default: 'body') - DOM Element to animate
-* property: CSS property (default: 'opacity') - CSS Property to adjust (options listed above)
-* prop_start: integer (default: 0) - Value of CSS property at start of animation
-* prop_end: integer (default:  1) - 0 - Value of CSS property at end of animation
-* unit: unit indicator (default: '') - CSS Unit of measurement (px, em, %, or '' if there is no Unit)
-* timeline_start: integer - 0 - 100 (default: 0) - Position on timeline to begin animation (%)
-* timeline_end: integer - 0 - 100  (default: 10) - Position on timeline to end animation (%)
+* **element**: jQuery DOM element selector (default: 'body') - DOM Element to animate
+* **property**: CSS property (default: 'opacity') - CSS Property to adjust (options listed above)
+* **prop_start**: integer (default: 0) - Value of CSS property at start of animation
+* **prop_end**: integer (default:  1) - 0 - Value of CSS property at end of animation
+* **unit**: unit indicator (default: '') - CSS Unit of measurement (px, em, %, or '' if there is no Unit)
+* **timeline_start**: integer - 0 - 100 (default: 0) - Position on timeline to begin animation (%)
+* **timeline_end**: integer - 0 - 100  (default: 10) - Position on timeline to end animation (%)
 
 ##### Example
 ``` Javascript
