@@ -10,7 +10,15 @@ _kinda like these sites_
 * http://2011.beercamp.com/
 * http://www.nintendo.com.au/gamesites/mariokartwii/
 
-## Re-visiting our web
+## Contents
+* [Re-Visiting Our Web](#re-visiting-our-web)
+* [About the Library](#about-the-library-what-it-do)
+* [Dependencies](#dependencies)
+* [Usage](#usage)
+* [Browser Support](#browser-support)
+* [Next Steps](#next-steps)
+
+## Re-Visiting Our Web
 
 The scenery.js Javascript tool was developed while investigating our uses of the web and web browsers, and trying to determine successful techniques around what makes websites 'cool', 'memorable', 'hot', or any other positive adjectives.
 
@@ -63,7 +71,7 @@ At this time, the library supports mapping to the following CSS properties:
 ## Dependencies
 
 Currently, this library depends on:
-* jQuery 1.9.x (http://code.jquery.com/)
+* jQuery 1.10.x (http://code.jquery.com/)
 * Underscore.js (http://underscorejs.org/)
 
 ## Usage
@@ -140,6 +148,7 @@ Over time, it is expected that hooks to make concessions for mobile and antique 
 ## Next steps
 
 Things we are looking to cover next:
+* a thorough example implementation
 * more examples and integration of feedback from people who are trying it out (the objective is to make this tool as beginner-friendly as possible)
 * mobile considerations (sometimes you can implement this to good effect on mobile, but sometimes you will not want to try mapping things to the scrollbar on mobile devices)
 * more optimizations to help ensure that frame rate considerations are taken into account when using the library (some requestAnimationFrame action)
