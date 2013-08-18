@@ -7,8 +7,8 @@
  */
 
 // Creating Complete Movie
-var GenerateMovie = (function($,_){
-	var GenerateMovie = function(options){
+var Scenery = (function($,_){
+	var Scenery = function(options){
 		var defaults = {
 				scenes: 7,
 				scene_length: 'window',
@@ -59,7 +59,7 @@ var GenerateMovie = (function($,_){
 		$(window).on('scroll',scene_switch);
 	}
 
-	GenerateMovie.prototype = {
+	Scenery.prototype = {
 
 		environment : function(){
 			this.Window = {};
@@ -98,7 +98,7 @@ var GenerateMovie = (function($,_){
 			}
 		}
 	}
-	return GenerateMovie;
+	return Scenery;
 })($,_);
 
 // Create a Thread
@@ -119,6 +119,7 @@ var Thread = (function($,_){
 			self = this,
 			self_env;
 
+
 		$(window).on('scroll',function(){
 			scrollProps = {};
 			scrollProps.Y = $(window).scrollTop();
@@ -136,7 +137,10 @@ var Thread = (function($,_){
 				
 			}
 			if(pct_complete*100 < options.timeline_start){
-				$(options.element).css(options.property,(options.start_props + options.unit));
+				console.log(options.property);
+				console.log(start_props);
+				console.log(options.unit);
+				$(options.element).css(options.property,(start_props));
 			}
 
 			if(pct_complete*100 > options.timeline_end){

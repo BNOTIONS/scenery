@@ -1,0 +1,20 @@
+#box-1 {
+	width: 200px;
+	height: 200px;
+	background: yellow;
+	position: relative;
+	top: 10%;
+	left: 0%;
+}
+
+.scene-5 #box-1 {
+	background: orange;
+}
+
+.scene-10 #box-1 {
+	background: green;
+}
+
+.scene-15 #box-1 {
+	background: pink;
+}

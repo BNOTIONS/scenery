@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var movie = new GenerateMovie({
+	var movie = new Scenery({
 		scenes: 15, /*Number of Scenes || int */
 		scene_length: 'window', /* Height of each scene || int or 'window' if you want the 'length of one of your secenes to be the size of your browser window'  */
 		stage_ele: '#stage', /* element to use as your movie 'stage' */
