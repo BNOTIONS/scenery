@@ -149,6 +149,7 @@ Over time, it is expected that hooks to make concessions for mobile and antique 
 
 Things we are looking to cover next:
 * a thorough example implementation
+* support for browser window re-sizing
 * more examples and integration of feedback from people who are trying it out (the objective is to make this tool as beginner-friendly as possible)
 * mobile considerations (sometimes you can implement this to good effect on mobile, but sometimes you will not want to try mapping things to the scrollbar on mobile devices)
 * more optimizations to help ensure that frame rate considerations are taken into account when using the library (some requestAnimationFrame action)

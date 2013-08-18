@@ -24,11 +24,9 @@ var Scenery = (function($,_){
 			scene_switch;
 
 		if(options.main_ele){
-			console.log('true');
 			environment = this.environment();
 			main_height = $(options.main_ele).outerHeight();
 			if(main_height > this.Window.height){
-			console.log('true');
 				var woffset = main_height - this.Window.height;
 				var mainThread = new Thread({
 					element: options.main_ele,
@@ -49,7 +47,10 @@ var Scenery = (function($,_){
 
 		$(options.stage_ele).css ({
 			position: 'fixed',
-			width: '100%'
+			width: '100%',
+			height: '100%',
+			top: 0,
+			left: 0
 		});
 
 		timeline = this.timeline(options.scenes, options.scene_length, options.timeline_ele, options.stage_ele, options.stage_height, options.scene_mgr);
@@ -119,27 +120,27 @@ var Thread = (function($,_){
 			self = this,
 			self_env;
 
+
 		$(window).on('scroll',function(){
 			scrollProps = {};
 			scrollProps.Y = $(window).scrollTop();
 			self_env = self.environment();
-			pct_complete = (scrollProps.Y/self.Doc.height);
+			pct_complete = ((scrollProps.Y/(self.Doc.height - self.Window.height)*100));
 			px_start = ((options.timeline_start/100) * (self.Doc.height - self.Window.height));
 			px_end = ((options.timeline_end/100) * (self.Doc.height - self.Window.height));
 			lengthOfAnimation = px_end - px_start;
 			
-			if(options.timeline_start < pct_complete*100 && options.timeline_end > pct_complete*100){
+			if(options.timeline_start < pct_complete && options.timeline_end > pct_complete){
 				
 				pctAnimationComplete = ((scrollProps.Y - px_start) / lengthOfAnimation);
 
-				$(options.element).css(options.property, options.prop_start + ((options.prop_end - options.prop_start) * (pctAnimationComplete)) + options.unit);
-				
+				$(options.element).css(options.property, (parseFloat(options.prop_start) + parseFloat((options.prop_end - options.prop_start) * (pctAnimationComplete))) + options.unit);
 			}
-			if(pct_complete*100 < options.timeline_start){
-				$(options.element).css(options.property,(options.start_props + options.unit));
+			if(pct_complete < options.timeline_start){
+				$(options.element).css(options.property,(start_props));
 			}
 
-			if(pct_complete*100 > options.timeline_end){
+			if(pct_complete > options.timeline_end){
 				$(options.element).css(options.property,(options.prop_end + options.unit));
 			}
 		});
