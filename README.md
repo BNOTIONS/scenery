@@ -140,8 +140,8 @@ var thread = new Thread({
 ## Browser Support
 scenery.js has been tested and is performant in the following browsers:
 * latest version of Chrome
-* latest version of Firefox
-* latest version of Internet Explorer
+* latest version of Firefox (a little bit rough around the edges)
+* latest version of Internet Explorer (also a little bit rough around the edges)
 
 Over time, it is expected that hooks to make concessions for mobile and antique browsers will be made
 
