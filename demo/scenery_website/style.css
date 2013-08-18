@@ -1,3 +1,7 @@
+body {
+	font-family: Arial;
+}
+
 .screen {
 	width: 100%;
 	height: 100%;
@@ -6,7 +10,7 @@
 
 #screen-1 {
 	top: -100%;
-	background: yellow;
+	background: gold;
 }
 
 #screen-2 {
@@ -16,5 +20,110 @@
 
 #screen-3 {
 	left: 100%;
-	background: green;
+	top: 0;
+	background: lightblue;
 }
+
+#main_content h1{
+	text-align: center;
+	font-size: 100px;
+	position: relative;
+	top: 10%;
+	z-index: 7777;
+	margin-bottom: 0;
+	color: white;
+	text-shadow: 1px 1px 1px gold;
+}
+
+.scene-3 #main_content h1 {
+	text-shadow: 0px 0px 0px white;
+}
+
+#main_content h2 {
+	text-align: center;
+	z-index: 7777;
+	display: none;
+	position: relative;
+	font-size: 30px;
+	font-family: 'The Girl Next Door', cursive;
+}
+
+#main_content h2, #main_content a{
+	color: white;
+}
+
+#main_content a{
+	font-family: Arial, sans-serif;
+}
+
+.scene-17 #main_content h2 {
+	display: block;
+}
+
+#tsb {
+	width: 50px;
+	height: 95%;
+	position: absolute;
+	top: 2.5%;
+	right: 2.5%;
+	border-top: 5px solid white;
+	border-left: 5px solid white;
+	border-bottom: 5px solid white;
+	z-index: 7777;
+	color: white;
+	opacity: 0;
+}
+
+#tsb p {
+	text-align: center;
+	position: relative;
+	left: -200px;
+	width: 180px;
+	font-size: 22px;
+	font-family: 'The Girl Next Door', cursive;
+}
+
+#tsb p span{
+	display: none;
+	line-height: 1.4;
+}
+
+.scene-4 #tsb-1 {
+
+	display: block;
+}
+
+.scene-5 #tsb-2 {
+
+	display: block;
+	font-size: 50px;
+}
+
+.scene-6 #tsb-3 {
+
+	display: block;
+}
+
+.scene-7 #tsb-4 {
+
+	display: block;
+}
+
+#rect-1 {
+	position: absolute;
+	bottom: 10%;
+	height: 10px;
+	width: 0;
+	background: white;
+}
+
+#rect-2 {
+	position: absolute;
+	bottom: 10%;
+	height: 0px;
+	width: 10px;
+	background: white;
+	left: 50%;
+}
+
+
