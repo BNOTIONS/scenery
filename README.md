@@ -2,7 +2,7 @@
 
 ## 140 character summary
 
-scenery.js is a Javascript tool that helps make it simpler to do interesting things on a web page as it scrolls
+Scenery.js is a Javascript tool that helps make it simpler to do interesting things on a web page as it scrolls
 
 _kinda like these sites_
 * http://line25.com/articles/15-awesome-websites-that-tell-a-story-as-you-scroll
