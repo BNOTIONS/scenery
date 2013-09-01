@@ -40,15 +40,9 @@ var Scenery = (function($,_){
 			}
 		}
 
-		if(options.scene_length == 'window'){
-			environment = this.environment();
-			options.scene_length = this.Window.height;
-		}
-
 		$(options.stage_ele).css ({
 			position: 'fixed',
 			width: '100%',
-			height: '100%',
 			top: 0,
 			left: 0
 		});
@@ -56,23 +50,11 @@ var Scenery = (function($,_){
 		timeline = this.timeline(options.scenes, options.scene_length, options.timeline_ele, options.stage_ele, options.stage_height, options.scene_mgr);
 
 		scene_switch = _.bind(this.sceneSwitches, this, options.scenes, options.scene_length, options.scene_mgr);
-		
 		$(window).on('scroll',scene_switch);
 
-		$(window).on('resize',function(){
-			if(options.scene_length == 'window'){
-				environment = this.environment();
-				options.scene_length = this.Window.height;
-				options.stage_height = this.Window.height;
-				timeline = this.timeline(options.scenes, options.scene_length, options.timeline_ele, options.stage_ele, options.stage_height, options.scene_mgr);
-			}
+		movie_resize = _.bind(this.movieResize, this, options.scene_length, options.stage_ele, options.stage_height);
+		$(window).on('resize',movie_resize);
 
-			if(stage_height == 'window'){
-				$(options.stage_ele).css({
-					height: scene_length + 'px'
-				});
-			}			
-		});
 	}
 
 	Scenery.prototype = {
@@ -88,18 +70,29 @@ var Scenery = (function($,_){
 		},
 
 		timeline : function(scenes, scene_length, timeline_ele, stage_ele, stage_height, scene_mgr){
+			environment = this.environment();
+			if(scene_length == 'window'){
+				scene_length = this.Window.height;
+			}
+
 			$(timeline_ele).css({
 				height: scene_length * scenes + 'px'
 			});
+			
 			$(scene_mgr).addClass('scene-1');
-			if(options.stage_height == 'window'){
+			
+			if(stage_height == 'window'){
 				$(stage_ele).css({
-					height: scene_length + 'px'
+					height: this.Window.height + 'px'
 				});
 			}
+
 		},
 
 		sceneSwitches : function(scenes, scene_length, scene_mgr){
+			if(scene_length == 'window'){
+				scene_length = this.Window.height;
+			}
 			scrollProps = {};
 			scrollProps.Y = $(window).scrollTop();
 			
@@ -112,6 +105,20 @@ var Scenery = (function($,_){
 
 				}
 			}
+		},
+
+		movieResize : function(scene_length, stage_ele, stage_height){
+			var self = this;
+			environment = this.environment();
+			if(scene_length == 'window'){
+				scene_length = this.Window.height;
+			}
+
+			if(stage_height == 'window'){
+				$(stage_ele).css({
+					height: scene_length + 'px'
+				});
+			}	
 		}
 	}
 	return Scenery;
