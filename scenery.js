@@ -58,6 +58,21 @@ var Scenery = (function($,_){
 		scene_switch = _.bind(this.sceneSwitches, this, options.scenes, options.scene_length, options.scene_mgr);
 		
 		$(window).on('scroll',scene_switch);
+
+		$(window).on('resize',function(){
+			if(options.scene_length == 'window'){
+				environment = this.environment();
+				options.scene_length = this.Window.height;
+				options.stage_height = this.Window.height;
+				timeline = this.timeline(options.scenes, options.scene_length, options.timeline_ele, options.stage_ele, options.stage_height, options.scene_mgr);
+			}
+
+			if(stage_height == 'window'){
+				$(options.stage_ele).css({
+					height: scene_length + 'px'
+				});
+			}			
+		});
 	}
 
 	Scenery.prototype = {
@@ -77,7 +92,7 @@ var Scenery = (function($,_){
 				height: scene_length * scenes + 'px'
 			});
 			$(scene_mgr).addClass('scene-1');
-			if(stage_height = 'window'){
+			if(options.stage_height == 'window'){
 				$(stage_ele).css({
 					height: scene_length + 'px'
 				});
@@ -116,10 +131,8 @@ var Thread = (function($,_){
 				timeline_end : 10 
 			},
 			options = $.extend({}, defaults, options),
-			start_props = $(options.element).css(options.property),
 			self = this,
 			self_env;
-
 
 		$(window).on('scroll',function(){
 			scrollProps = {};
@@ -130,6 +143,10 @@ var Thread = (function($,_){
 			px_end = ((options.timeline_end/100) * (self.Doc.height - self.Window.height));
 			lengthOfAnimation = px_end - px_start;
 			
+			if(scrollProps.Y == 0){
+				$(options.element).css(options.property,(options.prop_start + options.unit));
+			}
+
 			if(options.timeline_start < pct_complete && options.timeline_end > pct_complete){
 				
 				pctAnimationComplete = ((scrollProps.Y - px_start) / lengthOfAnimation);
@@ -137,13 +154,14 @@ var Thread = (function($,_){
 				$(options.element).css(options.property, (parseFloat(options.prop_start) + parseFloat((options.prop_end - options.prop_start) * (pctAnimationComplete))) + options.unit);
 			}
 			if(pct_complete < options.timeline_start){
-				$(options.element).css(options.property,(start_props));
+				$(options.element).css(options.property,(options.prop_start + options.unit));
 			}
 
 			if(pct_complete > options.timeline_end){
 				$(options.element).css(options.property,(options.prop_end + options.unit));
 			}
 		});
+
 	}
 
 	Thread.prototype = {

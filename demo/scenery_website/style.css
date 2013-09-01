@@ -3,37 +3,48 @@ body {
 }
 
 .screen {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	position: absolute;
 }
 
+#scroll_prompt {
+	position: absolute;
+	bottom: 5vh;
+	right: 5vw;
+	text-align: center;
+	font-size: 4vh;
+	font-family: 'The Girl Next Door', cursive;
+	color: gray;
+}
+
 #screen-1 {
-	top: -100%;
+	top: -100vh;
 	background: gold;
 }
 
 #screen-2 {
-	top: 100%;
+	top: 100vh;
 	background: orange;
 }
 
 #screen-3 {
-	left: 100%;
+	right: -100vw;
 	top: 0;
 	background: lightblue;
 }
 
 #main_content h1{
 	text-align: center;
-	font-size: 100px;
+	font-size: 13vh;
 	position: relative;
-	top: 10%;
+	top: 5vh;
 	z-index: 7777;
 	margin-bottom: 0;
 	color: white;
 	text-shadow: 1px 1px 1px gold;
 }
+
 
 .scene-3 #main_content h1 {
 	text-shadow: 0px 0px 0px white;
@@ -44,9 +55,24 @@ body {
 	z-index: 7777;
 	display: none;
 	position: relative;
-	font-size: 30px;
+	font-size: 5vh;
 	font-family: 'The Girl Next Door', cursive;
+	top: 5vh;
 }
+
+
+@media screen and (max-width: 800px) {
+	#main_content h1{
+		font-size: 8vh;
+		top: 10vh;
+	}
+
+	#main_content h2{
+		font-size: 3vh;
+		top: 10vh;
+	}
+}
+
 
 #main_content h2, #main_content a{
 	color: white;
@@ -56,16 +82,16 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-.scene-17 #main_content h2 {
+.scene-13 #main_content h2 {
 	display: block;
 }
 
 #tsb {
-	width: 50px;
-	height: 95%;
+	width: 5vw;
+	height: 95vh;
 	position: absolute;
-	top: 2.5%;
-	right: 2.5%;
+	top: 2.5vh;
+	right: 2.5vh;
 	border-top: 5px solid white;
 	border-left: 5px solid white;
 	border-bottom: 5px solid white;
@@ -77,9 +103,9 @@ body {
 #tsb p {
 	text-align: center;
 	position: relative;
-	left: -200px;
-	width: 180px;
-	font-size: 22px;
+	left: -20vw;
+	width: 18vw;
+	font-size: 4vh;
 	font-family: 'The Girl Next Door', cursive;
 }
 
@@ -96,7 +122,7 @@ body {
 .scene-5 #tsb-2 {
 
 	display: block;
-	font-size: 50px;
+	font-size: 8vh;
 }
 
 .scene-6 #tsb-3 {
@@ -111,19 +137,35 @@ body {
 
 #rect-1 {
 	position: absolute;
-	bottom: 10%;
-	height: 10px;
+	bottom: 10vh;
+	height: 1vh;
 	width: 0;
 	background: white;
 }
 
 #rect-2 {
 	position: absolute;
-	bottom: 10%;
-	height: 0px;
-	width: 10px;
+	bottom: 10vh;
+	height: 0vh;
+	width: 1vh;
 	background: white;
-	left: 50%;
+	left: 50vw;
 }
 
+#rect-3 {
+	position: absolute;
+	bottom: 50vh;
+	height: 1vh;
+	width: 0;
+	background: white;
+	left: 50vw;
+}
 
+#rect-4 {
+	position: absolute;
+	bottom: 50vh;
+	height: 1vh;
+	width: 0;
+	background: white;
+	left: 50vw;
+}
