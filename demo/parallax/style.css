@@ -1,0 +1,270 @@
+body {
+	font-family: 'Unkempt', cursive;
+	color: darkslategray;
+}
+
+#scroll_prompt {
+	position: absolute;
+	bottom: 20vh;
+	right: 5vw;
+	text-align: center;
+	font-size: 4vh;
+}
+
+.box {
+	position: absolute;
+	left: 0;
+	bottom: 5vh;
+}
+
+#box-1 {
+	width: 3vmin;
+	height: 3vmin;
+	border: 5px solid green;
+	background: pink;
+	position: absolute;
+	left: 0;
+}
+
+#box-2 {
+	width: 4vmin;
+	height: 4vmin;
+	border: 5px solid blue;
+	background: orange;
+	position: absolute;
+	left: 0;
+}
+
+#box-3 {
+	width: 3vmin;
+	height: 6vmin;
+	border: 5px solid salmon;
+	background: lightblue;
+	position: absolute;
+	left: 0;
+}
+
+#box-4 {
+	width: 2vmin;
+	height: 5vmin;
+	border: 5px solid orange;
+	background: lime;
+	position: absolute;
+	left: 0;
+}
+
+#road {
+	width: 200vw;
+	background: lightgray;
+	border-top: 10px dashed yellow;
+	height: 10vh;
+	bottom: -5vh;
+	right: 0;
+	position: absolute;
+}
+#road_bg {
+	width: 200vw;
+	background: lightgray;
+	border-top: 2px solid gray;
+	height: 13vh;
+	bottom: -5vh;
+	right: 0;
+	position: absolute;
+}
+
+.secondary {
+	opacity: 0;
+}
+
+#main_content {
+	text-align: center;
+}
+
+h1, h2, p {
+	position: relative;
+}
+section {
+	background: rgba(255,255,255,.8);
+}
+
+p, #title {
+	opacity: 0;
+
+}
+
+header {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+
+#header_cover {
+	width: 100%;
+	height: 100%;
+	background: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+
+#section_1 {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+
+#section_1_cover {
+	width: 100%;
+	height: 100%;
+	background: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+
+#pt_4 {
+	position: absolute;
+	bottom: 12vh;
+	left: 25vw;
+	width: 32vh;
+	line-height: 1.5;
+	-webkit-border-radius: 50px;
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius: 50px;
+	-moz-border-radius-bottomleft: 0;
+	border-radius: 50px;
+	border-bottom-left-radius: 0;
+	border: 5px solid yellow;
+	padding: 20px;
+	z-index: -1;
+	background: white;
+}
+
+#sky {
+	width: 100vw;
+	height: 40vh;
+	background: lightblue;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: -2;
+	border-top: 2px solid blue;
+	opacity: 0;
+}
+
+#sun {
+	position: absolute;
+	top: 2vh;
+	right: 5vw;
+	background: yellow;
+	height: 50px;
+	width: 50px;
+	border-radius: 40px;
+}
+
+.cloud {
+  width: 4em;
+  height: 3em;
+  position: absolute;
+  font-size: 2vmin;
+  top: 6vmin;
+
+}
+
+.mid_cloud {
+  width: 4em;
+  height: 3em;
+  position: absolute;
+  font-size: 3vmin;
+  top: 7vmin;
+}
+
+.big_cloud {
+  width: 4em;
+  height: 3em;
+  position: absolute;
+  font-size: 4vmin;
+  top: 8vmin;
+}
+
+.cloud_parts {
+	position: absolute;
+	background: white;
+}
+ 
+.cloud_left {
+  width: 1.5em;
+  height: 2em;
+  border-radius: 1em;
+  bottom: 0;
+  left: .5em;
+}
+ 
+.cloud_mid {
+  width: 4em;
+  height: 1em;
+  border-radius: 1em;
+  bottom: 0;
+  left: 0;
+}
+ 
+.cloud_right {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  border-radius: 1em;
+  top: .8em;
+  right: .5em;
+}
+
+#cloud_1 {
+	margin-left: 13vw;
+}
+#cloud_2 {
+	margin-left: 80vw;
+}
+#cloud_3 {
+	margin-left: 30vw;
+}
+#cloud_4 {
+	margin-left: 40vw;
+}
+#cloud_5 {
+	margin-left: 60vw;
+}
+#cloud_6 {
+	margin-left: 80vw;
+}
+#cloud_7 {
+	margin-left: 90vw;
+}
+#cloud_8 {
+	margin-left: 100vw;
+}
+
+#flagpole {
+	position: absolute;
+	right: -4vw;
+	bottom: 4vw;
+	height: 8vw;
+	width: 4vw;
+}
+
+#flag {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 2vw;
+	width: 4vw;
+	background: orange;
+}
+#pole {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 8vw;
+	width: .5vw;
+	background: black;
+}
