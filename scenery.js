@@ -1,8 +1,11 @@
 /*
- * scenery.js v0.1
+ * scenery.js v0.2
  *
  * Assembled by BNOTIONS - Zach Forrester and Mark Reale
- * Copyright 2013, MIT License
+ * Thanks to: 
+ *	- Craig Dallimore (Stint Functionality Inspiration)
+ *	- Alex Tucker (the code used to be a lot worse)
+ * Copyright 2014, MIT License
  *
  */
 
@@ -185,4 +188,87 @@ var Thread = (function($,_){
 	}
 
 	return Thread;
+})($,_);
+
+// Creating a Stint
+var Stint = (function($,_){
+	var Stint = function(options){
+		var defaults = {
+			element : '#box-1',
+			property : 'opacity',
+			prop_start : 1,
+			prop_end : 0,
+			unit : '',
+			timeline_start : 0,
+			timeline_end : 50
+		},
+		options = $.extend({}, defaults, options),
+		self = this,
+		self_env;
+		self.options = options;
+
+		$(window).on('scroll',function(){
+			self_env = self.environment();
+			pct_complete = ((((self.View.top + self.Window.height) - self.Ele.top) / (self.Window.height + self.Ele.height)) * 100);
+			
+
+			
+			px_start = ((options.timeline_start/100) * (self.Window.height + self.Ele.height));
+			px_end = ((options.timeline_end/100) * (self.Window.height + self.Ele.height));
+			lengthOfAnimation = px_end - px_start;
+			
+			/*
+			if(scrollProps.Y == 0){
+				$(options.element).css(options.property,(options.prop_start + options.unit));
+			}
+			*/
+
+			if((self.Ele.top <= self.View.bottom) && (self.Ele.bottom >= self.View.top) && (self.Ele.left <= self.View.right) && (self.Ele.right >= self.View.left)){
+				
+				if(options.timeline_start < pct_complete && options.timeline_end > pct_complete){
+					
+					pctAnimationComplete = (((self.View.top + self.Window.height) - self.Ele.top) / lengthOfAnimation);
+
+					if(pctAnimationComplete < 1){
+						$(options.element).css(options.property, (parseFloat(options.prop_start) + parseFloat((options.prop_end - options.prop_start) * (pctAnimationComplete))) + options.unit);
+					}
+				}
+				
+				
+				if(pct_complete < options.timeline_start){
+					$(options.element).css(options.property,(options.prop_start + options.unit));
+				}
+
+				if(pct_complete > options.timeline_end){
+					$(options.element).css(options.property,(options.prop_end + options.unit));
+				}
+				
+			}
+		});
+		
+	}
+
+	Stint.prototype = {
+		environment : function(){
+			this.Window = {};
+			this.Ele = {};
+			this.View = {};
+
+			this.Window.height = $(window).height();
+			this.Window.width = $(window).width();
+			
+			this.Ele.height = $(this.options.element).height();
+			this.Ele.width = $(this.options.element).width();
+			this.Ele.top = $(this.options.element).offset().top;
+			this.Ele.left = $(this.options.element).offset().left;
+			this.Ele.bottom = (this.Ele.top + this.Ele.height);
+			this.Ele.right = (this.Ele.left + this.Ele.width);
+			
+			this.View.top = $(window).scrollTop();
+			this.View.left = $(window).scrollLeft();
+			this.View.bottom = (this.View.top + this.Window.height);
+			this.View.right = (this.View.left + this.Window.width);
+		}
+	}
+	return Stint;
 })($,_);
