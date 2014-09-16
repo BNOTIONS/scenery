@@ -208,9 +208,6 @@ var Thread = (function($){
 	return Thread;
 })($);
 
-/* jshint ignore:end */
-
-/* jshint ignore:start */
 // // Creating a Stint
 var Stint = (function($){
 	var Stint = function(options){
