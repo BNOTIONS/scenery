@@ -220,9 +220,7 @@ var Stint = (function($){
 			unit : '',
             speed : .15,
 			timeline_start : false,
-			timeline_end : false,
-            custom_class: false,
-            trigger_class: false
+            custom_class: false
 		};
 
         this.options = $.extend({}, defaults, options);
@@ -264,24 +262,33 @@ var Stint = (function($){
                 visible = this.isVisible();
 
 
-            if( visible ){
+            if ( visible ){
 
                 animation_top = opt.timeline_start ? ((this.elm.origin_top - this.view.top) - timeline_offset) : this.view.top;
                 animation_pct = Math.abs(animation_top * opt.speed / 100);
-                animation_counter = Math.abs(this.distance * animation_pct);
-                pos_counter = opt.prop_start + (this.distance * animation_pct) * this.direction
-
+                animation_counter = this.distance * animation_pct;
+                pos_counter = opt.prop_start + animation_counter * this.direction
 
                 if ((opt.timeline_start && animation_top <= 0 && animation_counter <= this.distance) ||
                     !opt.timeline_start && animation_counter < this.distance) {
+
+                    if (opt.custom_class){
+                        this.$elm.addClass(opt.custom_class);
+                    }
 
                     this.$elm.css(opt.property, pos_counter + opt.unit);
 
                 }
 
+                if (opt.custom_class && animation_top >= 0) {
+                    this.$elm.removeClass(opt.custom_class);
+                }
+
             }
 
         },
+
+
 
         isVisible: function(){
 
