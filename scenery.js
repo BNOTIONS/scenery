@@ -218,9 +218,9 @@ var Stint = (function($){
 			prop_start : 1,
 			prop_end : 0,
 			unit : '',
-            speed : .15,
+			speed : .15,
 			timeline_start : false,
-            custom_class: false
+			custom_class: false
 		};
 
         this.options = $.extend({}, defaults, options);
@@ -298,7 +298,7 @@ var Stint = (function($){
 
 		setEnvironment : function(){
 
-            var elm_offset = this.$elm.offset();
+			var elm_offset = this.$elm.offset();
 
 			this.win.height = this.$win.height();
 			this.win.width = this.$win.width();
