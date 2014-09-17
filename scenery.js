@@ -8,20 +8,22 @@
 
 // Creating Complete Movie
 var Scenery = (function($,_){
+
 	var Scenery = function(options){
+
 		var defaults = {
-				scenes: 7,
-				scene_length: 'window',
-				timeline_ele: 'html',
-				stage_ele: '#stage',
-				stage_height: 'window',
-				scene_mgr: 'body',
-				main_ele: null
-			},
-			options = $.extend({}, defaults, options),
-			environment,
-			timeline,
-			scene_switch;
+			scenes: 7,
+			scene_length: 'window',
+			timeline_ele: 'html',
+			stage_ele: '#stage',
+			stage_height: 'window',
+			scene_mgr: 'body',
+			main_ele: null
+		},
+		options = $.extend({}, defaults, options),
+		environment,
+		timeline,
+		scene_switch;
 
 		if(options.main_ele){
 			environment = this.environment();
@@ -124,65 +126,219 @@ var Scenery = (function($,_){
 	return Scenery;
 })($,_);
 
+
 // Create a Thread
-var Thread = (function($,_){
+var Thread = (function($){
 
 	var Thread = function(options){
-		var defaults = {
-				element : 'body',
-				property : 'opacity', 
-				prop_start : 0, 
-				prop_end : 1, 
-				unit : '', 
-				timeline_start : 0, 
-				timeline_end : 10 
-			},
-			options = $.extend({}, defaults, options),
-			self = this,
-			self_env;
 
-		$(window).on('scroll',function(){
-			scrollProps = {};
-			scrollProps.Y = $(window).scrollTop();
-			self_env = self.environment();
-			pct_complete = ((scrollProps.Y/(self.Doc.height - self.Window.height)*100));
-			px_start = ((options.timeline_start/100) * (self.Doc.height - self.Window.height));
-			px_end = ((options.timeline_end/100) * (self.Doc.height - self.Window.height));
-			lengthOfAnimation = px_end - px_start;
-			
-			if(scrollProps.Y == 0){
-				$(options.element).css(options.property,(options.prop_start + options.unit));
-			}
+        var defaults = {
+			element : 'body',
+			property : 'opacity',
+			prop_start : 0,
+			prop_end : 1,
+			unit : '',
+			timeline_start : 0,
+			timeline_end : 10,
+			custom_class: false,
+			trigger_class: false
+		};
 
-			if(options.timeline_start < pct_complete && options.timeline_end > pct_complete){
-				
-				pctAnimationComplete = ((scrollProps.Y - px_start) / lengthOfAnimation);
+        this.$win = $(window);
+        this.$doc = $(document);
+        this.options = $.extend({}, defaults, options);
 
-				$(options.element).css(options.property, (parseFloat(options.prop_start) + parseFloat((options.prop_end - options.prop_start) * (pctAnimationComplete))) + options.unit);
-			}
-			if(pct_complete < options.timeline_start){
-				$(options.element).css(options.property,(options.prop_start + options.unit));
-			}
-
-			if(pct_complete > options.timeline_end){
-				$(options.element).css(options.property,(options.prop_end + options.unit));
-			}
-		});
+        this.$win.on('scroll', _.bind(this.scrollElm, this));
 
 	}
 
 	Thread.prototype = {
+        scrollElm: function() {
 
-		environment : function(){
-			this.Window = {};
-			this.Doc = {};
-			this.Window.height = $(window).height();
-			this.Window.width = $(window).width();
-			this.Doc.height = $(document).height();
-			this.Doc.width = $(document).width();
-			
-		}
+            var scroll = {
+                pos_y: this.$win.scrollTop(),
+                pos_x: this.$win.scrollLeft()
+            };
+
+            var win = {
+                height: this.$win.height(),
+                width:  this.$win.width()
+            };
+
+            var doc = {
+                height: this.$doc.height(),
+                width:  this.$doc.width()
+            };
+
+            var opt = this.options,
+                $elm =  $(opt.element),
+                pct_complete = ((scroll.pos_y / (doc.height - win.height)*100)),
+                px_start = ((opt.timeline_start/100) * (doc.height - win.height)),
+                px_end = ((opt.timeline_end/100) * (doc.height - win.height)),
+                animation_length = px_end - px_start,
+                animation_pct = '';
+
+             if(scroll.pos_y === 0){
+                $elm.css(opt.property,(opt.prop_start + opt.unit));
+             }
+
+             if(opt.timeline_start < pct_complete && opt.timeline_end > pct_complete){
+
+                if(opt.custom_class && pct_complete >= opt.trigger_class){
+                    $elm.addClass(opt.custom_class);
+                }
+
+                animation_pct = ((scroll.pos_y - px_start) / animation_length);
+
+                $elm.css(opt.property, (parseFloat(opt.prop_start) + parseFloat((opt.prop_end - opt.prop_start) * (animation_pct))) + opt.unit);
+             }
+
+             if(pct_complete < opt.timeline_start){
+                 $elm.css(opt.property,(opt.prop_start + opt.unit));
+             }
+
+             if(pct_complete > opt.timeline_end){
+                 $elm.css(opt.property,(opt.prop_end + opt.unit));
+             }
+
+        }
+
 	}
 
 	return Thread;
-})($,_);
+})($);
+
+// // Creating a Stint
+var Stint = (function($){
+	var Stint = function(options){
+
+		var defaults = {
+			element : '#box-1',
+			property : 'opacity',
+			prop_start : 1,
+			prop_end : 0,
+			unit : '',
+			speed : .15,
+			timeline_start : false,
+			custom_class: false
+		};
+
+        this.options = $.extend({}, defaults, options);
+
+        this.win = {};
+        this.elm = {};
+        this.view = {};
+
+        this.$win = $(window);
+        this.$doc = $(document);
+        this.$elm = $(this.options.element);
+
+        this.elm.origin_top = this.getOriginalOffset();
+
+        this.diff = this.options.prop_start - this.options.prop_end;
+        this.distance = Math.abs(this.diff);
+        this.direction = this.diff > 0 ? -1 : 1;
+
+        this.bindEvents();
+
+
+	};
+
+
+
+	Stint.prototype = {
+
+        scrollElm: function() {
+
+            this.setEnvironment();
+
+            var opt = this.options,
+                animation_pct,
+                animation_counter,
+                animation_start,
+                animation_top,
+                pos_counter,
+                timeline_offset = (opt.timeline_start / 100) * this.win.height,
+                visible = this.isVisible();
+
+
+            if ( visible ){
+
+                animation_top = opt.timeline_start ? ((this.elm.origin_top - this.view.top) - timeline_offset) : this.view.top;
+                animation_pct = Math.abs(animation_top * opt.speed / 100);
+                animation_counter = this.distance * animation_pct;
+                pos_counter = opt.prop_start + animation_counter * this.direction
+
+                if ((opt.timeline_start && animation_top <= 0 && animation_counter <= this.distance) ||
+                    !opt.timeline_start && animation_counter < this.distance) {
+
+                    if (opt.custom_class){
+                        this.$elm.addClass(opt.custom_class);
+                    }
+
+                    this.$elm.css(opt.property, pos_counter + opt.unit);
+
+                }
+
+                if (opt.custom_class && animation_top >= 0) {
+                    this.$elm.removeClass(opt.custom_class);
+                }
+
+            }
+
+        },
+
+
+
+        isVisible: function(){
+
+            return  (this.elm.top <= this.view.bottom) && (this.elm.bottom >= this.view.top) &&
+                    (this.elm.left <= this.view.right) && (this.elm.right >= this.view.left);
+        },
+
+		setEnvironment : function(){
+
+			var elm_offset = this.$elm.offset();
+
+			this.win.height = this.$win.height();
+			this.win.width = this.$win.width();
+
+			this.elm.height = this.$elm.height();
+			this.elm.width = this.$elm.width();
+			this.elm.top = elm_offset.top;
+			this.elm.left = elm_offset.left;
+			this.elm.bottom = this.elm.top + this.elm.height;
+			this.elm.right = this.elm.left + this.elm.width;
+
+			this.view.top = this.$win.scrollTop();
+			this.view.left = this.$win.scrollLeft();
+			this.view.bottom = (this.view.top + this.win.height);
+			this.view.right = (this.view.left + this.win.width);
+		},
+
+        bindEvents: function(){
+
+            this.$win.on('scroll', _.bind(this.scrollElm, this));
+            this.$win.on('resize', _.bind(this.setEnvironment, this));
+
+        },
+
+        getOriginalOffset: function() {
+
+            return this.$elm.offset().top;
+
+        },
+
+        getPropValue: function() {
+
+            var computed_style = window.getComputedStyle(this.$elm[0]);
+
+            return computed_style[this.options.property];
+
+        }
+
+	}
+
+    return Stint;
+
+})($);
