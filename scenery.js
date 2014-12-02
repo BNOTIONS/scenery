@@ -209,7 +209,7 @@ var Thread = (function($){
 })($);
 
 // // Creating a Stint
-var Stint = (function($){
+var Stint = (function($, _){
 	var Stint = function(options){
 
 		var defaults = {
@@ -218,9 +218,9 @@ var Stint = (function($){
 			prop_start : 1,
 			prop_end : 0,
 			unit : '',
-			speed : .15,
+            speed : .15,
 			timeline_start : false,
-			custom_class: false
+            custom_class: false
 		};
 
         this.options = $.extend({}, defaults, options);
@@ -233,14 +233,19 @@ var Stint = (function($){
         this.$doc = $(document);
         this.$elm = $(this.options.element);
 
+        this.computed_style = this.getComputedStyle(this.$elm);
+        this.prefix = this.getVendorPrefix(this.$elm);
         this.elm.origin_top = this.getOriginalOffset();
 
         this.diff = this.options.prop_start - this.options.prop_end;
         this.distance = Math.abs(this.diff);
         this.direction = this.diff > 0 ? -1 : 1;
 
-        this.bindEvents();
+        this.transform = this.hasTransform(this.options.property);
+        this.transform_matrix = this.transform ? this.getTransformMatrix() : null;
+        this.transform_values = this.transform ? this.setTransform() : null;
 
+        this.bindEvents();
 
 	};
 
@@ -262,7 +267,7 @@ var Stint = (function($){
                 visible = this.isVisible();
 
 
-            if ( visible ){
+            if (visible){
 
                 animation_top = opt.timeline_start ? ((this.elm.origin_top - this.view.top) - timeline_offset) : this.view.top;
                 animation_pct = Math.abs(animation_top * opt.speed / 100);
@@ -272,11 +277,26 @@ var Stint = (function($){
                 if ((opt.timeline_start && animation_top <= 0 && animation_counter <= this.distance) ||
                     !opt.timeline_start && animation_counter < this.distance) {
 
+
                     if (opt.custom_class){
                         this.$elm.addClass(opt.custom_class);
                     }
 
-                    this.$elm.css(opt.property, pos_counter + opt.unit);
+
+                    if (this.transform){
+
+                        this.$elm.css({
+                            '-webkit-transform': this.transform_values +' ' + opt.property+'('+ pos_counter + opt.unit+')',
+                            '-moz-transform': this.transform_values +' ' + opt.property+'('+ pos_counter + opt.unit+')',
+                            '-ms-transform': this.transform_values +' ' + opt.property+'('+ pos_counter + opt.unit+')',
+                            'transform': this.transform_values +' ' + opt.property+'('+ pos_counter + opt.unit+')'
+                        });
+
+
+                    } else {
+                        this.$elm.css(opt.property, pos_counter + opt.unit);
+                    }
+
 
                 }
 
@@ -288,33 +308,11 @@ var Stint = (function($){
 
         },
 
-
-
         isVisible: function(){
 
             return  (this.elm.top <= this.view.bottom) && (this.elm.bottom >= this.view.top) &&
                     (this.elm.left <= this.view.right) && (this.elm.right >= this.view.left);
         },
-
-		setEnvironment : function(){
-
-			var elm_offset = this.$elm.offset();
-
-			this.win.height = this.$win.height();
-			this.win.width = this.$win.width();
-
-			this.elm.height = this.$elm.height();
-			this.elm.width = this.$elm.width();
-			this.elm.top = elm_offset.top;
-			this.elm.left = elm_offset.left;
-			this.elm.bottom = this.elm.top + this.elm.height;
-			this.elm.right = this.elm.left + this.elm.width;
-
-			this.view.top = this.$win.scrollTop();
-			this.view.left = this.$win.scrollLeft();
-			this.view.bottom = (this.view.top + this.win.height);
-			this.view.right = (this.view.left + this.win.width);
-		},
 
         bindEvents: function(){
 
@@ -323,17 +321,170 @@ var Stint = (function($){
 
         },
 
+        hasTransform: function(property) {
+
+            return  property === 'translate' ||
+                    property === 'rotate' ||
+                    property === 'scale' ||
+                    property === 'skew'
+        },
+
         getOriginalOffset: function() {
 
             return this.$elm.offset().top;
 
         },
 
-        getPropValue: function() {
+        getPropertyValue: function(property) {
 
-            var computed_style = window.getComputedStyle(this.$elm[0]);
+            return this.computed_style[property];
 
-            return computed_style[this.options.property];
+        },
+
+        getComputedStyle: function(elm) {
+
+            return window.getComputedStyle(elm[0]);
+
+        },
+
+        getVendorPrefix: function(elm) {
+
+            var styles = this.computed_style,
+                prefix = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/))[1];
+
+            return '-' + prefix + '-';
+
+        },
+
+        setEnvironment : function(){
+
+            var elm_offset = this.$elm.offset();
+
+            this.win.height = this.$win.height();
+            this.win.width = this.$win.width();
+
+            this.elm.height = this.$elm.height();
+            this.elm.width = this.$elm.width();
+            this.elm.top = elm_offset.top;
+            this.elm.left = elm_offset.left;
+            this.elm.bottom = this.elm.top + this.elm.height;
+            this.elm.right = this.elm.left + this.elm.width;
+
+            this.view.top = this.$win.scrollTop();
+            this.view.left = this.$win.scrollLeft();
+            this.view.bottom = (this.view.top + this.win.height);
+            this.view.right = (this.view.left + this.win.width);
+
+        },
+
+        setTransform: function(){
+
+            var self = this,
+                transform = [],
+                unit;
+
+            _.each(this.transform_matrix, function(val, key){
+
+                if(self.options.property !== key && key !== 'translate'){
+
+                    unit = self.setUnit(key);
+                    transform.push(key+'('+ val + unit +')');
+
+                }
+
+            });
+
+            return transform = transform.join(' ');
+
+        },
+
+        setUnit: function(key) {
+
+            var unit;
+
+            switch(key){
+
+                case 'translate':
+                    unit = 'px';
+                    break;
+
+                case 'rotate':
+                    unit = 'deg';
+                    break;
+
+                case 'skew':
+                    unit = 'deg';
+                    break;
+
+                case 'scale':
+                    unit = '';
+                    break;
+
+            }
+
+            return unit;
+
+        },
+
+        getTransformMatrix: function(matrix){
+
+            //unmatrixjs for help with some of the math caluculations
+            var transform = this.getPropertyValue(this.prefix+'transform'),
+                split_start = transform.split('(')[1],
+                split_end = split_start.split(')')[0],
+                matrix = split_end.split(',');
+
+            var a = matrix[0],
+                b = matrix[1],
+                c = matrix[2],
+                d = matrix[3],
+                e = matrix[4],
+                f = matrix[5],
+                skew_a,
+                rads,
+                rotate;
+
+            var scale_x = Math.sqrt(a * a + b * b);
+            a /= scale_x;
+            b /= scale_x;
+
+
+            var skew_b = a * c + b * d;
+            c -= a * skew_b;
+            d -= b * skew_b;
+
+
+            var scale_y = Math.sqrt(c * c + d * d);
+            c /= scale_y;
+            d /= scale_y;
+            skew_b /= scale_y;
+
+
+            if ( a * d < b * c ) {
+                a = -a;
+                b = -b;
+                skew_b = -skew_b;
+                scale_x = -scale_x;
+            }
+
+
+            skew_b = Math.atan(skew_b),
+            skew_a = Math.round(skew_b * (180/Math.PI));
+            rads = Math.atan2(b, a);
+
+            if ( rads < 0 ) { rads += (2 * Math.PI); }
+
+            rotate = Math.round( rads * (180/Math.PI));
+
+            return {
+                'rotate': rotate,
+                'scale': scale_x,
+                'skew': skew_a,
+                'translate': {
+                    'x': e,
+                    'y': f
+                }
+            }
 
         }
 
@@ -341,4 +492,4 @@ var Stint = (function($){
 
     return Stint;
 
-})($);
+})($, _);
