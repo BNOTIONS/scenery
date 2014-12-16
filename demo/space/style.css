@@ -1,0 +1,249 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000; }
+
+.container--space {
+  height: 100em;
+  width: 100%;
+  background: #000; }
+  .container--space .content {
+    position: fixed;
+    height: 100%;
+    width: 100%; }
+
+.solar_sytem {
+  position: fixed;
+  height: 800px;
+  width: 800px;
+  background: #000;
+  left: 50%;
+  top: 50%;
+  margin-left: -400px;
+  -webkit-transform: translate(0, -50%) scale(0.5);
+  -moz-transform: translate(0, -50%) scale(0.5);
+  -ms-transform: translate(0, -50%) scale(0.5);
+  -o-transform: translate(0, -50%) scale(0.5);
+  transform: translate(0, -50%) scale(0.5); }
+  .solar_sytem .content {
+    opacity: 0.5; }
+
+.planet, .sun, .sun--happy {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-position: center center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain; }
+
+.sun, .sun--happy {
+  background-image: url('../images/sun.png');
+  height: 100px;
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  opacity: 1;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  -webkit-transition: all, 1s, ease-in-out;
+  -moz-transition: all, 1s, ease-in-out;
+  transition: all, 1s, ease-in-out; }
+  .sun.fade, .fade.sun--happy {
+    opacity: 0; }
+
+.sun--happy {
+  background-image: url('../images/sun-happy.png');
+  opacity: 0;
+  -webkit-transition: all, 0.65s, ease-in-out;
+  -moz-transition: all, 0.65s, ease-in-out;
+  transition: all, 0.65s, ease-in-out; }
+  .sun--happy.fade {
+    opacity: 1; }
+
+.orbit, .orbit--1, .orbit--2, .orbit--3, .orbit--4, .orbit--5, .orbit--6, .orbit--7, .orbit--8 {
+  position: absolute;
+  border-radius: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%); }
+
+.orbit--1 {
+  width: 20%;
+  height: 20%;
+  margin-left: -10%; }
+  .orbit--1 .planet, .orbit--1 .sun, .orbit--1 .sun--happy {
+    background-image: url('../images/planet-1.png');
+    left: 125px;
+    width: 25px; }
+
+.orbit--2 {
+  width: 30%;
+  height: 30%;
+  margin-left: -15%; }
+  .orbit--2 .planet, .orbit--2 .sun, .orbit--2 .sun--happy {
+    background-image: url('../images/planet-2.png');
+    top: -22px;
+    left: 85px;
+    width: 40px;
+    -webkit-transform: rotate(275deg);
+    -moz-transform: rotate(275deg);
+    -ms-transform: rotate(275deg);
+    -o-transform: rotate(275deg);
+    transform: rotate(275deg); }
+
+.orbit--3 {
+  width: 40%;
+  height: 40%;
+  margin-left: -20%; }
+  .orbit--3 .planet, .orbit--3 .sun, .orbit--3 .sun--happy {
+    background-image: url('../images/planet-3.png');
+    bottom: -15px;
+    left: 190px;
+    width: 50px;
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+    transform: rotate(20deg); }
+
+.orbit--4 {
+  width: 52%;
+  height: 52%;
+  margin-left: -26%; }
+  .orbit--4 .planet, .orbit--4 .sun, .orbit--4 .sun--happy {
+    background-image: url('../images/planet-4.png');
+    bottom: 0;
+    left: 95px;
+    width: 38px;
+    -webkit-transform: rotate(95deg);
+    -moz-transform: rotate(95deg);
+    -ms-transform: rotate(95deg);
+    -o-transform: rotate(95deg);
+    transform: rotate(95deg); }
+
+.orbit--5 {
+  width: 66%;
+  height: 66%;
+  margin-left: -33%; }
+  .orbit--5 .planet, .orbit--5 .sun, .orbit--5 .sun--happy {
+    background-image: url('../images/planet-5.png');
+    top: 20px;
+    left: 70px;
+    height: 70px;
+    width: 70px;
+    -webkit-transform: rotate(195deg);
+    -moz-transform: rotate(195deg);
+    -ms-transform: rotate(195deg);
+    -o-transform: rotate(195deg);
+    transform: rotate(195deg); }
+
+.orbit--6 {
+  width: 80%;
+  height: 80%;
+  margin-left: -40%; }
+  .orbit--6 .planet, .orbit--6 .sun, .orbit--6 .sun--happy {
+    background-image: url('../images/planet-6.png');
+    top: 265px;
+    left: -35px;
+    width: 75px;
+    -webkit-transform: rotate(75deg);
+    -moz-transform: rotate(75deg);
+    -ms-transform: rotate(75deg);
+    -o-transform: rotate(75deg);
+    transform: rotate(75deg); }
+
+.orbit--7 {
+  width: 90%;
+  height: 90%;
+  margin-left: -45%; }
+  .orbit--7 .planet, .orbit--7 .sun, .orbit--7 .sun--happy {
+    background-image: url('../images/planet-7.png');
+    top: 470px;
+    right: 0;
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg); }
+
+.orbit--8 {
+  width: 100%;
+  height: 100%;
+  margin-left: -50%; }
+  .orbit--8 .planet, .orbit--8 .sun, .orbit--8 .sun--happy {
+    background-image: url('../images/planet-8.png');
+    top: 64px;
+    right: 130px;
+    width: 40px;
+    -webkit-transform: rotate(330deg);
+    -moz-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    -o-transform: rotate(330deg);
+    transform: rotate(330deg); }
+
+.particle {
+  height: 2px;
+  width: 2px;
+  opacity: 0.85;
+  position: absolute;
+  border-radius: 100%;
+  background: #fff;
+  -webkit-animation: fade 1.5s infinite 1s ease-in-out both;
+  -webkit-transition: transform 0.25s ease-in-out; }
+
+@-webkit-keyframes fade {
+  50% {
+    opacity: 0.15; } }
+
+@-moz-keyframes fade {
+  50% {
+    opacity: 0.15; } }
+
+@keyframes fade {
+  50% {
+    opacity: 0.15; } }
+
+@-webkit-keyframes fade_move {
+  100% {
+    -webkit-transform: translate3d(100px, 75px, 1000px); } }
+
+@-moz-keyframes fade_move {
+  100% {
+    -moz-transform: translate3d(100px, 75px, 1000px); } }
+
+@keyframes fade_move {
+  100% {
+    -webkit-transform: translate3d(100px, 75px, 1000px);
+    -moz-transform: translate3d(100px, 75px, 1000px);
+    -ms-transform: translate3d(100px, 75px, 1000px);
+    -o-transform: translate3d(100px, 75px, 1000px);
+    transform: translate3d(100px, 75px, 1000px); } }
+
+@-webkit-keyframes rotate {
+  50% {
+    -webkit-transform: rotateZ(360deg); } }
+
+@-moz-keyframes rotate {
+  50% {
+    -moz-transform: rotateZ(360deg); } }
+
+@keyframes rotate {
+  50% {
+    -webkit-transform: rotateZ(360deg);
+    -moz-transform: rotateZ(360deg);
+    -ms-transform: rotateZ(360deg);
+    -o-transform: rotateZ(360deg);
+    transform: rotateZ(360deg); } }

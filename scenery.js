@@ -210,22 +210,23 @@ var Thread = (function($){
 
 // // Creating a Stint
 var Stint = (function($, _){
-	var Stint = function(options){
+    var Stint = function(options){
 
-		var defaults = {
-			element : '#box-1',
-			property : 'opacity',
-			prop_start : 1,
-			prop_end : 0,
-			unit : '',
+        var defaults = {
+            element : '#box-1',
+            property : 'opacity',
+            prop_start : 1,
+            prop_end : 0,
+            unit : '',
             speed : .15,
-			timeline_start : false,
+            timeline_start : false,
             custom_class: false
-		};
+        };
 
         this.options = $.extend({}, defaults, options);
 
         this.win = {};
+        this.doc = {};
         this.elm = {};
         this.view = {};
 
@@ -247,11 +248,11 @@ var Stint = (function($, _){
 
         this.bindEvents();
 
-	};
+    };
 
 
 
-	Stint.prototype = {
+    Stint.prototype = {
 
         scrollElm: function() {
 
@@ -277,11 +278,9 @@ var Stint = (function($, _){
                 if ((opt.timeline_start && animation_top <= 0 && animation_counter <= this.distance) ||
                     !opt.timeline_start && animation_counter < this.distance) {
 
-
                     if (opt.custom_class){
                         this.$elm.addClass(opt.custom_class);
                     }
-
 
                     if (this.transform){
 
@@ -292,17 +291,20 @@ var Stint = (function($, _){
                             'transform': this.transform_values +' ' + opt.property+'('+ pos_counter + opt.unit+')'
                         });
 
-
                     } else {
                         this.$elm.css(opt.property, pos_counter + opt.unit);
                     }
-
 
                 }
 
                 if (opt.custom_class && animation_top >= 0) {
                     this.$elm.removeClass(opt.custom_class);
                 }
+
+                if (opt.timeline_end && opt.custom_class && (this.doc.height - this.view.bottom <= 1)){
+                    this.$elm.addClass(opt.custom_class);
+                }
+
 
             }
 
@@ -350,9 +352,9 @@ var Stint = (function($, _){
         getVendorPrefix: function(elm) {
 
             var styles = this.computed_style,
-                prefix = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/))[1];
+                prefix1 = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/))[1];
 
-            return '-' + prefix + '-';
+            return '-' + prefix1 + '-';
 
         },
 
@@ -362,6 +364,8 @@ var Stint = (function($, _){
 
             this.win.height = this.$win.height();
             this.win.width = this.$win.width();
+
+            this.doc.height = this.$doc.height();
 
             this.elm.height = this.$elm.height();
             this.elm.width = this.$elm.width();
@@ -381,14 +385,18 @@ var Stint = (function($, _){
 
             var self = this,
                 transform = [],
-                unit;
+                unit,
+                property;
 
             _.each(this.transform_matrix, function(val, key){
 
-                if(self.options.property !== key && key !== 'translate'){
+                if(self.options.property !== key){
 
                     unit = self.setUnit(key);
-                    transform.push(key+'('+ val + unit +')');
+
+                    property = (key === 'translate') ? key+'('+ val.x + unit +', '+ val.y + unit +')' : key+'('+ val + unit +')';
+
+                    transform.push(property);
 
                 }
 
@@ -488,7 +496,7 @@ var Stint = (function($, _){
 
         }
 
-	}
+    }
 
     return Stint;
 

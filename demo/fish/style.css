@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #0c59b5; }
+
+.container--fish {
+  height: 100em;
+  width: 100%;
+  background: #0c59b5; }
+
+.water, .water--front, .water--mid, .water--back {
+  position: absolute;
+  background: #0c59b5 url(../images/bg_underwater1060.png) no-repeat;
+  height: 600px;
+  width: 100%; }
+
+.water--front {
+  background-position: center top; }
+
+.water--mid {
+  -webkit-animation: water_fade 4s linear infinite;
+  -moz-animation: water_fade 4s linear infinite;
+  animation: water_fade 4s linear infinite;
+  background-position: 30% top; }
+
+.water--back {
+  -webkit-animation: water_fade 7s linear infinite;
+  -moz-animation: water_fade 7s linear infinite;
+  animation: water_fade 7s linear infinite;
+  background-position: 80% top; }
+
+.fish--1, .fish--2, .fish--3, .fish--4, .fish--5, .fish--6, .fish--7, .fish--8 {
+  position: absolute;
+  height: 100px;
+  width: 175px;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-position: center center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain; }
+
+.fish--1 {
+  background-image: url('../images/fish-1.png');
+  top: 600px;
+  left: -125px; }
+
+.fish--2 {
+  top: 400px;
+  left: 900px;
+  background-image: url('../images/fish-2.png'); }
+
+.fish--3 {
+  top: 100px;
+  left: 175px;
+  background-image: url('../images/fish-3.png'); }
+
+.fish--4 {
+  top: 250px;
+  left: 800px;
+  background-image: url('../images/fish-4.png'); }
+
+.fish--5 {
+  top: 1000px;
+  left: 400px;
+  background-image: url('../images/fish-5.png'); }
+
+.fish--6 {
+  top: 900px;
+  left: 900px;
+  background-image: url('../images/fish-6.png'); }
+
+.fish--7 {
+  top: 800px;
+  left: 100px;
+  background-image: url('../images/fish-7.png'); }
+
+.fish--8 {
+  top: 1100px;
+  left: 300px;
+  background-image: url('../images/fish-8.png');
+  font-family: sans-serif;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg); }
+  .fish--8:after {
+    content: 'X';
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    top: 24px;
+    left: 29px;
+    color: #000;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-weight: bold; }
+
+/* animations */
+@-webkit-keyframes water_fade {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes water_fade {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@keyframes water_fade {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
