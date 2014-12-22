@@ -98,7 +98,7 @@ $(function(){
         unit: 'deg',
         speed: .1
     });
-
+    
 
     var simple_7 = new Stint({
         element: '.orbit--7',
@@ -141,7 +141,7 @@ $(function(){
         prop_start: 1,
         prop_end: 1,
         speed: .001,
-        custom_class: 'fade',
+        class: 'fade',
         timeline_end: true
     });
 
@@ -151,9 +151,8 @@ $(function(){
         prop_start: 1,
         prop_end: 1,
         speed: .001,
-        custom_class: 'fade',
+        class: 'fade',
         timeline_end: true
     });
-
 
 });

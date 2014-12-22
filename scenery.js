@@ -219,8 +219,8 @@ var Stint = (function($, _){
             prop_end : 0,
             unit : '',
             speed : .15,
-            timeline_start : false,
-            custom_class: false
+            timeline : false,
+            class: false
         };
 
         this.options = $.extend({}, defaults, options);
@@ -278,8 +278,8 @@ var Stint = (function($, _){
                 if ((opt.timeline_start && animation_top <= 0 && animation_counter <= this.distance) ||
                     !opt.timeline_start && animation_counter < this.distance) {
 
-                    if (opt.custom_class){
-                        this.$elm.addClass(opt.custom_class);
+                    if (opt.class){
+                        this.$elm.addClass(opt.class);
                     }
 
                     if (this.transform){
@@ -297,12 +297,12 @@ var Stint = (function($, _){
 
                 }
 
-                if (opt.custom_class && animation_top >= 0) {
-                    this.$elm.removeClass(opt.custom_class);
+                if (opt.class && animation_top >= 0) {
+                    this.$elm.removeClass(opt.class);
                 }
 
-                if (opt.timeline_end && opt.custom_class && (this.doc.height - this.view.bottom <= 1)){
-                    this.$elm.addClass(opt.custom_class);
+                if (opt.timeline_end && opt.class && (this.doc.height - this.view.bottom <= 1)){
+                    this.$elm.addClass(opt.class);
                 }
 
 
@@ -437,7 +437,8 @@ var Stint = (function($, _){
         getTransformMatrix: function(matrix){
 
             //unmatrixjs for help with some of the math caluculations
-            var transform = this.getPropertyValue(this.prefix+'transform'),
+            var property = (this.prefix !== '-moz-') ? this.prefix + 'transform' : 'transform',
+                transform = this.getPropertyValue(property),
                 split_start = transform.split('(')[1],
                 split_end = split_start.split(')')[0],
                 matrix = split_end.split(',');
